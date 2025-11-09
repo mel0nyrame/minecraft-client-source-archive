@@ -1,0 +1,25 @@
+ if (em.isPre() && Criticals.MODE.equalsIgnoreCase("AAC4")) {
+                Criticals.mc.thePlayer.lastReportedPosY = 0.0;
+                final double ypos = Criticals.mc.thePlayer.posY;
+                if (MoveUtils.isOnGround(0.001)) {
+                    em.setOnGround(false);
+                    if (this.stage == 0) {
+                        this.y = ypos + 1.0E-8;
+                        em.setOnGround(true);
+                    }
+                    else if (this.stage == 1) {
+                        this.y -= 5.0E-15;
+                    }
+                    else {
+                        this.y -= 4.0E-15;
+                    }
+                    if (this.y <= Criticals.mc.thePlayer.posY) {
+                        this.stage = 0;
+                        this.y = Criticals.mc.thePlayer.posY;
+                        em.setOnGround(true);
+                    }
+                    em.setY(this.y);
+                    ++this.stage;
+                }
+                else {
+                    this.stage = 0;
